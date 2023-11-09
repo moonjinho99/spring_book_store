@@ -19,12 +19,24 @@ public class AdminServiceimpl implements AdminService{
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	//상품 등록
 	@Override
 	public void bookEnroll(BookVO book) {
 		
 		log.info("(service)bookEnroll.....");
 		
 		adminMapper.bookEnroll(book);
+		
+		if(book.getImageList() == null || book.getImageList().size() <= 0) {
+			return;
+		}
+		
+		book.getImageList().forEach(attach ->{
+			
+			attach.setBookId(book.getBookId());
+			adminMapper.imageEnroll(attach);
+			
+		});
 	}
 	
 	//카테고리 리스트
