@@ -69,7 +69,7 @@
                     			</div>
                     			<div class="form_section_content">
                     				<input id="authorName_input" readonly="readonly">
-									<input id="authorId_input" name="authorId" type="hidden" value="96">
+									<input id="authorId_input" name="authorId" type="hidden" value="">
 									<button class="authorId_btn">작가 선택</button>
                     			<span class="ck_warn authorId_warn">작가를 선택해주세요</span>
                     			</div>
@@ -227,7 +227,7 @@ $("#enrollBtn").on("click",function(e){
 	
 	/* 체크 대상 변수 */
 	let bookName = $("input[name='bookName']").val();
-	let authorId = $("input[name='authorName_input']").val();
+	let authorId = $("input[name='authorId']").val();
 	let publeYear = $("input[name='publeYear']").val();
 	let publisher = $("input[name='publisher']").val();
 	let cateCode = $("select[name='cateCode']").val();
