@@ -20,28 +20,28 @@ public class AdminMapperTests {
 	private AdminMapper mapper;
 	
 	//상품 등록
-	@Test
-	public void bookEnrollTest() throws Exception{
-		
-		BookVO book = new BookVO();
-		
-		book.setBookName("abcdefg");
-		book.setAuthorId(123);
-		book.setPubleYear("2023-11-07");
-		book.setPublisher("출판사");
-		book.setCateCode("100000");
-		book.setBookPrice(20000);
-		book.setBookStock(300);
-		book.setBookDiscount(0.23);
-		book.setBookIntro("책 소개");
-		book.setBookContents("책 목차");
-		
-		System.out.println("Before BookVO :" + book);
-		
-		mapper.bookEnroll(book);
-		
-		System.out.println("After BookVO :" + book);
-	}
+//	@Test
+//	public void bookEnrollTest() throws Exception{
+//		
+//		BookVO book = new BookVO();
+//		
+//		book.setBookName("abcdefg");
+//		book.setAuthorId(123);
+//		book.setPubleYear("2023-11-07");
+//		book.setPublisher("출판사");
+//		book.setCateCode("100000");
+//		book.setBookPrice(20000);
+//		book.setBookStock(300);
+//		book.setBookDiscount(0.23);
+//		book.setBookIntro("책 소개");
+//		book.setBookContents("책 목차");
+//		
+//		System.out.println("Before BookVO :" + book);
+//		
+//		mapper.bookEnroll(book);
+//		
+//		System.out.println("After BookVO :" + book);
+//	}
 	
 	//카테고리 리스트
 //	@Test
@@ -130,5 +130,33 @@ public class AdminMapperTests {
 //		mapper.imageEnroll(vo);
 //	}
 //	
-
+	
+	//지정 상품 이미지 삭제
+//	@Test
+//	public void deleteImageAllTest() {
+//		
+//		int bookId = 6150;
+//		
+//		mapper.deleteImageAll(bookId);
+//	}
+	
+	//어제자 날짜 이미지 리스트
+//	@Test
+//	public void checkImageListTest() {
+//		
+//		mapper.checkFileList();
+//		
+//	}
+	
+	//지정 상품 이미지 정보 얻기
+	
+	@Test
+	public void getAttachInfoTest() {
+		
+		int bookId = 6153;
+		
+		List<AttachImageVO> list = mapper.getAttachInfo(bookId);
+		
+		System.out.println("list : "+list);
+	}
 }

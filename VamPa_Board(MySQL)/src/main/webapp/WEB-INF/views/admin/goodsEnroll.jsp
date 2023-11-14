@@ -327,6 +327,8 @@ $("#enrollBtn").on("click",function(e){
 });
 
 
+
+
 /* 위지윅 적용 */
 
 /* 책 소개 */
