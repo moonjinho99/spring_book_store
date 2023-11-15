@@ -139,14 +139,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-
-
-
-
-
-
-
-
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>

@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sun.net.httpserver.HttpHandler;
 import com.vam.mapper.AttachMapper;
 import com.vam.model.AttachImageVO;
+import com.vam.model.BookVO;
+import com.vam.model.Criteria;
+import com.vam.model.PageDTO;
+import com.vam.service.BookService;
 
 @Controller
 public class BookController {
@@ -29,12 +34,18 @@ public class BookController {
 	@Autowired
 	private AttachMapper attachMapper;
 	
+	@Autowired
+	private BookService bookService;
+	
 	
 	//메인 페이지 이동
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void mainPageGET() {
+	public void mainPageGET(Model model) {
 		
 		logger.info("메인 페이지 진입");
+		
+		model.addAttribute("cate1",bookService.getCateCode1());
+		model.addAttribute("cate2",bookService.getCateCode2());
 		
 	}
 	
@@ -70,5 +81,25 @@ public class BookController {
 		return new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachList(bookId),HttpStatus.OK);
 	}
 	
+	//상품 검색
+	@GetMapping("/search")
+	public String searchGoodsGET(Criteria cri, Model model)
+	{
+		logger.info("cri : "+cri);
+		
+		List<BookVO> list= bookService.getsGoodsList(cri);
+		logger.info("pre list : "+list);
+		if(!list.isEmpty()) {
+			model.addAttribute("list",list);
+			logger.info("list : "+list);
+		} else {
+			model.addAttribute("listcheck","empty");
+			
+			return "search";
+		}
+		model.addAttribute("pageMaker",new PageDTO(cri, bookService.goodsGetTotal(cri)));
+	
+		return "search";
+	}
 	
 }
