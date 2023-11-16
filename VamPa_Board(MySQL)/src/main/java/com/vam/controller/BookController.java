@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -99,7 +100,27 @@ public class BookController {
 		}
 		model.addAttribute("pageMaker",new PageDTO(cri, bookService.goodsGetTotal(cri)));
 	
+		String[] typeArr = cri.getType().split("");
+		
+		for(String s: typeArr)
+		{
+			if(s.equals("T") || s.equals("A")) {
+				model.addAttribute("filter_info",bookService.getCateInfoList(cri));
+			}
+		}
+		model.addAttribute("filter_info",bookService.getCateInfoList(cri));
 		return "search";
+	}
+	
+	//상품 상세
+	@GetMapping("/goodsDetail/{bookId}")
+	public String goodsDetailGET(@PathVariable("bookId")int bookId, Model model) {
+		
+		logger.info("goodDetailGET()..........");
+		
+		model.addAttribute("goodsInfo",bookService.getGoodsInfo(bookId));
+		
+		return "/goodsDetail";
 	}
 	
 }
